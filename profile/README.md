@@ -58,3 +58,20 @@ Our infrastructure spans two AWS accounts within an AWS organization: the **Jenk
   - **Prometheus** (for metrics collection and monitoring)
 
   These Helm charts ensure that all applications and infrastructure components are deployed in a consistent, repeatable manner, streamlining management across environments.  
+
+- **Custom Kubernetes Operator in Go**  
+  We developed a Custom Kubernetes Operator using **Kubebuilder**. The operator defines two Custom Resource Definitions (CRDs): GitHubReleasesMonitor and GitHubRelease. These CRDs track the GitHub repository for new CVE releases, fetches them and processes them. 
+
+  - **CRD and Controller**: The `GitHubReleasesMonitor` CRD specifies the repository URL and a `monitorFrom` value to track releases. The **controller** watches for events on these resources and triggers the required reconciliation logic.
+
+  - **Reconciliation Process**: When a **GitHubReleasesMonitor** resource (CR) is created, the controller reconciles it by making API calls to GitHub to fetch new CVE releases. For each new release, a **GitHubRelease** resource (CR) is created. This triggers another reconciliation loop, which launches a Kubernetes Job to process the CVE data, using the containerized CVE processor application.
+
+  - **Deployment**: We build an image of the operator and deploy it as a Kubernetes **Deployment** via Helm Chart. The Helm chart bundles all necessary resources such as the operator's Deployment, Services, and CRDs.
+
+  This automated approach enables continuous monitoring of CVE releases and seamless integration of new data into our system. 
+
+- **Service Mesh with Istio**  
+We implemented Istio as a service mesh to secure and manage communication between our microservices. Istio’s sidecar proxies enhance security, reliability, and observability by controlling and monitoring all service-to-service traffic. Additionally, we utilize Istio's Ingress Gateway and Virtual Services to securely expose select services to the internet, ensuring external access is tightly controlled and monitored.
+
+- **Logging with FluentBit and CloudWatch**
+For centralized logging, we integrated FluentBit, which aggregates logs from both the EKS control plane and all microservices. These logs are forwarded to AWS CloudWatch, providing a unified view for tracing errors and monitoring application behavior across the entire system.
