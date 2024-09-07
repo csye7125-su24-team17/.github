@@ -7,14 +7,17 @@
 [<img src="https://img.shields.io/badge/-Kubernetes-326CE5?logo=kubernetes&logoColor=white&style=plastic" width="190" height="40" />](https://kubernetes.io/)
 [<img src="https://img.shields.io/badge/-Istio-466BB0?logo=istio&logoColor=white&style=plastic" width="100" height="40" />](https://istio.io/)
 [<img src="https://img.shields.io/badge/-Prometheus-E6522C?logo=prometheus&logoColor=white&style=plastic" width="170" height="40" />](https://prometheus.io/)
-[<img src="https://img.shields.io/badge/-Grafana-F46800?logo=grafana&logoColor=white&style=plastic" width="120" height="40" />](https://grafana.com/)
-[<img src="https://img.shields.io/badge/-HuggingFace-FFAE1A?logo=huggingface&logoColor=white&style=plastic" width="170" height="40" />](https://huggingface.co/)
+[<img src="https://img.shields.io/badge/-Grafana-F46800?logo=grafana&logoColor=white&style=plastic" width="130" height="40" />](https://grafana.com/)
+[<img src="https://img.shields.io/badge/-HuggingFace-FFAE1A?logo=huggingface&logoColor=white&style=plastic" width="180" height="40" />](https://huggingface.co/)
 [<img src="https://img.shields.io/badge/-Pinecone-339933?logo=pinecone&logoColor=white&style=plastic" width="110" height="40" />](https://www.pinecone.io/)
 [<img src="https://img.shields.io/badge/-LLaMA_3-7289DA?logo=ai&logoColor=white&style=plastic" width="100" height="40" />](https://ai.meta.com/llama/)
 
 ## Overview 
+This project delivers a scalable, cloud-native solution for processing and retrieving CVE data, powered by Kubernetes, microservices, and a Retrieval-Augmented Generation (RAG) model integrated with a large language model (LLM).
 
+Built on AWS EKS with Go, Kafka, and PostgreSQL, the system continuously monitors the official CVE GitHub repository, processes new releases, and stores the data for easy querying. Users can submit queries through an API, and our LLM-powered application—integrating Flask, Hugging Face, Pinecone, and LLaMA3—provides intelligent responses based on the latest CVE data.
 
+The infrastructure is managed with Terraform and Helm, ensuring high availability and reliability. Jenkins handles automated CI/CD, while Istio secures inter-service communication. Logging and monitoring are streamlined through FluentBit, CloudWatch, Prometheus, and Grafana.
 
 ## Architecture  
 ![Architecture Diagram](https://raw.githubusercontent.com/csye7125-su24-team17/.github/main/profile/Architecture%20Diagram.png)
