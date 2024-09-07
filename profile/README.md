@@ -106,3 +106,31 @@ Our system incorporates an **RAG-powered LLM-based CVE question-answer applicati
    The similar vectors, along with the query embedding, are provided as a prompt to the LLaMA3 LLM model, which then generates an accurate, context-aware response. We access the LLaMA3 model via the Groq API, ensuring high-performance and accurate query handling.
 
   This architecture allows external users to query the system for insights into the latest CVEs, with real-time processing and response generation powered by state-of-the-art machine learning models and vector databases.
+
+## Repositories  
+
+- [**CVE Processor Application**](https://github.com/csye7125-su24-team17/webapp-cve-processor)
+
+- [**Helm Chart for CVE Processor**](https://github.com/csye7125-su24-team17/helm-webapp-cve-processor)
+
+- [**CVE Consumer Application**](https://github.com/csye7125-su24-team17/webapp-cve-consumer)
+
+- [**Helm Chart for CVE Consumer**](https://github.com/csye7125-su24-team17/helm-webapp-cve-consumer)
+
+- [**Terraform code for AWS EKS Infrastructure**](https://github.com/csye7125-su24-team17/infra-aws)
+
+- [**Terraform code for Jenkins Infrastructure**](https://github.com/csye7125-su24-team17/infra-jenkins)
+
+- [**Jenkins AMI with Packer**](https://github.com/csye7125-su24-team17/ami-jenkins)
+
+- [**CVE Operator**](https://github.com/csye7125-su24-team17/cve-operator)
+
+- [**Helm Chart for CVE Operator**](https://github.com/csye7125-su24-team17/helm-cve-operator)
+
+- [**Helm Chart for EKS Cluster Autoscaler**](https://github.com/csye7125-su24-team17/helm-eks-autoscaler)
+
+- [**Helm Chart for FluentBit**](https://github.com/csye7125-su24-team17/helm-fluentBit-logs)
+
+- [**LLM Application**](https://github.com/csye7125-su24-team17/llm)
+
+- [**Helm Chart for LLM Application**](https://github.com/csye7125-su24-team17/helm-llm)
