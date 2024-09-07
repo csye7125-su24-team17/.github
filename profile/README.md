@@ -12,6 +12,23 @@
 [<img src="https://img.shields.io/badge/-Pinecone-339933?logo=pinecone&logoColor=white&style=plastic" width="110" height="40" />](https://www.pinecone.io/)
 [<img src="https://img.shields.io/badge/-LLaMA_3-7289DA?logo=ai&logoColor=white&style=plastic" width="100" height="40" />](https://ai.meta.com/llama/)
 
+## Overview 
+
+
 
 ## Architecture  
 ![Architecture Diagram](https://raw.githubusercontent.com/csye7125-su24-team17/.github/main/profile/Architecture%20Diagram.png)
+
+## Key Features 
+
+- **Go-based CVE Processor and Consumer Application with Kafka**  
+The core of our system is built around a Go-based CVE Processor that downloads, extracts, and processes JSON files from [CVEProject's Official GitHub Repository](https://github.com/CVEProject/cvelistV5/archive/refs/heads/main.zip), and then pushes it to a Kafka topic.
+
+    Next, we have a Go-based CVE Consumer that retrieves those messages from Kafka and stores them in a PostgreSQL database. Before storing in Postgres, we have Flyway migration scripts to automatically create the necessary schema, tables, and views in PostgreSQL.
+
+    We maintain Dockerfiles for the Flyway migration scripts, the CVE processor, and the CVE consumer applications. These Docker images are integrated into custom Helm charts that are deployed to an EKS Cluster, provisioned through Terraform. The PostgreSQL database is deployed using Bitnami's Helm chart. 
+    
+    Whenever we push code to these repositories on GitHub, Jenkins builds and publishes multi-architecture Docker images (supporting both arm and amd architectures) to our private Docker Hub repositories.
+    
+- **CI/CD Pipeline with Jenkins**  
+The 
