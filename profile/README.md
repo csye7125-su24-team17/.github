@@ -21,8 +21,8 @@
 
 ## Key Features 
 
-- **Go-based CVE Processor and Consumer Application, Kafka**  
-The core of our system is built around a **Go-based CVE Processor** that downloads, extracts, and processes JSON files from **[CVEProject's Official GitHub Repository](https://github.com/CVEProject/cvelistV5/archive/refs/heads/main.zip)**, and then pushes it to a Kafka topic.
+- **CVE Processor and Consumer Application written in Go**  
+The core of our system is built around a **Go-based CVE Processor** that downloads, extracts, and processes JSON files from **[CVEProject's Official GitHub Repository](https://github.com/CVEProject/cvelistV5/archive/refs/heads/main.zip)**, and then pushes it to a **Kafka** topic.
 
     Next, we have a **Go-based CVE Consumer** that retrieves those messages from Kafka and stores them in a PostgreSQL database. Before storing in Postgres, we have Flyway migration scripts to automatically create the necessary schema, tables, and views in PostgreSQL.
 
@@ -59,7 +59,7 @@ Our infrastructure spans two AWS accounts within an AWS organization: the **Jenk
 
   These Helm charts ensure that all applications and infrastructure components are deployed in a consistent, repeatable manner, streamlining management across environments.  
 
-- **Custom Kubernetes Operator in Go**  
+- **Custom Kubernetes Operator written in Go**  
   We developed a Custom Kubernetes Operator using **Kubebuilder**. The operator defines two Custom Resource Definitions (CRDs): GitHubReleasesMonitor and GitHubRelease. These CRDs track the GitHub repository for new CVE releases, fetches them and processes them. 
 
   - **CRD and Controller**: The `GitHubReleasesMonitor` CRD specifies the repository URL and a `monitorFrom` value to track releases. The **controller** watches for events on these resources and triggers the required reconciliation logic.
@@ -70,8 +70,25 @@ Our infrastructure spans two AWS accounts within an AWS organization: the **Jenk
 
   This automated approach enables continuous monitoring of CVE releases and seamless integration of new data into our system. 
 
+- **Service Mesh with Istio**  
+We implemented Istio as a service mesh to secure and manage communication between our microservices. Istio’s sidecar proxies enhance security, reliability, and observability by controlling and monitoring all service-to-service traffic. Additionally, we utilize Istio's Ingress Gateway and Virtual Services to securely expose select services to the internet, ensuring external access is tightly controlled and monitored.
+
+- **Logging with FluentBit and CloudWatch**  
+For centralized logging, we integrated FluentBit, which aggregates logs from both the EKS control plane and all microservices. These logs are forwarded to AWS CloudWatch, providing a unified view for tracing errors and monitoring application behavior across the entire system.
+
+- **Monitoring and Visualization with Prometheus and Grafana**  
+To maintain system health and performance, we implemented Prometheus for comprehensive metrics collection. Prometheus scrapes metrics from each microservice, which are then visualized through Grafana dashboards. This setup enables real-time monitoring of CPU, memory, network usage, and application-specific metrics, providing deep insights into system behavior and performance.
+
+- **Scalability and Reliability**  
+  - **Scalability**: The system dynamically auto-scales both pods (via Horizontal Pod Autoscaler) and nodes (via Cluster Autoscaler) to meet varying demands. Additionally, we employed Pod Disruption Budgets (PDBs) to minimize service disruptions during scaling operations.
+  - **Reliability**: To ensure robust service operation, we deployed liveness and readiness probes for all microservices.
+  - **Avilability**: We applied anti-affinity rules to prevent pods from being scheduled on the same node, enhancing fault tolerance and improving the overall availability of services.  
+  
+- **Security**  
+We implemented the Principle of Least Privilege (PoLP) by enforcing strict IAM roles, RBAC policies, and network policies. Additionally, we secured communications with SSL certificates managed through Kubernetes cert-manager, ensuring robust protection of our system.
+
 - **LLM Application Deployment**  
-Our system incorporates an **RAG-powered LLM-based question-answer application** that generates responses from the latest CVE data. This workflow utilizes several components:
+Our system incorporates an **RAG-powered LLM-based CVE question-answer application** that generates responses from the latest CVE data. This workflow utilizes several components:
 
    - **Flask API**:  
    External users send their queries related to CVEs via this API. These queries are then converted into vector embeddings for further processing.
@@ -86,12 +103,3 @@ Our system incorporates an **RAG-powered LLM-based question-answer application**
    The similar vectors, along with the query embedding, are provided as a prompt to the LLaMA3 LLM model, which then generates an accurate, context-aware response. We access the LLaMA3 model via the Groq API, ensuring high-performance and accurate query handling.
 
   This architecture allows external users to query the system for insights into the latest CVEs, with real-time processing and response generation powered by state-of-the-art machine learning models and vector databases.
-
-- **Service Mesh with Istio**  
-We implemented Istio as a service mesh to secure and manage communication between our microservices. Istio’s sidecar proxies enhance security, reliability, and observability by controlling and monitoring all service-to-service traffic. Additionally, we utilize Istio's Ingress Gateway and Virtual Services to securely expose select services to the internet, ensuring external access is tightly controlled and monitored.
-
-- **Logging with FluentBit and CloudWatch**  
-For centralized logging, we integrated FluentBit, which aggregates logs from both the EKS control plane and all microservices. These logs are forwarded to AWS CloudWatch, providing a unified view for tracing errors and monitoring application behavior across the entire system.
-
-- **Monitoring and Visualization with Prometheus and Grafana**  
-To maintain system health and performance, we implemented Prometheus for comprehensive metrics collection. Prometheus scrapes metrics from each microservice, which are then visualized through Grafana dashboards. This setup enables real-time monitoring of CPU, memory, network usage, and application-specific metrics, providing deep insights into system behavior and performance.
