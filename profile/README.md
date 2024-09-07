@@ -41,7 +41,7 @@ The **Jenkins AMI** is built using **Packer templates**, deployed via a **GitHub
 
   This setup allows for fully automated and reliable CI/CD processes across our entire ecosystem.
 
-- **Infrastructure with Terraform, Kubernetes, and Helm Charts**
+- **Infrastructure with Terraform, Kubernetes, and Helm Charts**  
 Our infrastructure spans two AWS accounts within an AWS organization: the **Jenkins Infra Account** and the **EKS Infra Account**. Using **Terraform**, we provision all cloud resources, including the **EKS Cluster**, along with the supporting infrastructure. The cluster is bootstrapped with several Kubernetes namespaces dedicated to our microservices, and the deployment of applications is automated using **Terraform’s Helm provider**.
 
     We manage deployments through **Helm charts** for the following components:
