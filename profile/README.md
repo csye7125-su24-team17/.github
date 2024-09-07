@@ -70,6 +70,23 @@ Our infrastructure spans two AWS accounts within an AWS organization: the **Jenk
 
   This automated approach enables continuous monitoring of CVE releases and seamless integration of new data into our system. 
 
+- **LLM Application Deployment**  
+Our system incorporates an **RAG-powered LLM-based question-answer application** that generates responses from the latest CVE data. This workflow utilizes several components:
+
+   - **Flask API**:  
+   External users send their queries related to CVEs via this API. These queries are then converted into vector embeddings for further processing.
+
+   - **Hugging Face Transformers**:  
+   We use Hugging Face's **Sentence Transformers Library** to convert user queries into vector embeddings. This embedding process is essential for finding similar vectors in the vector database.
+
+   - **Pinecone Vector Database**:  
+   The Pinecone Vector Database stores precomputed embeddings for all CVE data. When a query embedding is generated, Pinecone efficiently retrieves the most similar vectors from its database, enabling fast and accurate matching of relevant CVE information.
+
+   - **LLaMA3 Model**:  
+   The similar vectors, along with the query embedding, are provided as a prompt to the LLaMA3 LLM model, which then generates an accurate, context-aware response. We access the LLaMA3 model via the Groq API, ensuring high-performance and accurate query handling.
+
+  This architecture allows external users to query the system for insights into the latest CVEs, with real-time processing and response generation powered by state-of-the-art machine learning models and vector databases.
+
 - **Service Mesh with Istio**  
 We implemented Istio as a service mesh to secure and manage communication between our microservices. Istio’s sidecar proxies enhance security, reliability, and observability by controlling and monitoring all service-to-service traffic. Additionally, we utilize Istio's Ingress Gateway and Virtual Services to securely expose select services to the internet, ensuring external access is tightly controlled and monitored.
 
