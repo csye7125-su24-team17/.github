@@ -13,11 +13,11 @@
 [<img src="https://img.shields.io/badge/-LLaMA_3-7289DA?logo=ai&logoColor=white&style=plastic" width="100" height="40" />](https://ai.meta.com/llama/)
 
 ## Overview 
-This project delivers a scalable, cloud-native solution for processing and retrieving CVE data, powered by Kubernetes, microservices, and a Retrieval-Augmented Generation (RAG) model integrated with a large language model (LLM).
+This project delivers a scalable, cloud-native solution for processing and retrieving **CVE data**, powered by **Kubernetes**, **microservices**, and a **Retrieval-Augmented Generation (RAG)** model integrated with a large language model (LLM).
 
-Built on AWS EKS with Go, Kafka, and PostgreSQL, the system continuously monitors the official CVE GitHub repository, processes new releases, and stores the data for easy querying. Users can submit queries through an API, and our LLM-powered application—integrating Flask, Hugging Face, Pinecone, and LLaMA3—provides intelligent responses based on the latest CVE data.
+Built on **AWS EKS** with **Go**, **Kafka**, and **PostgreSQL**, the system continuously monitors the official CVE GitHub repository, processes new releases, and stores the data for easy querying. Users can submit queries through an API, and our LLM-powered application—integrating **Flask**, **Hugging Face**, **Pinecone**, and **LLaMA3**—provides intelligent responses based on the latest CVE data.
 
-The infrastructure is managed with Terraform and Helm, ensuring high availability and reliability. Jenkins handles automated CI/CD, while Istio secures inter-service communication. Logging and monitoring are streamlined through FluentBit, CloudWatch, Prometheus, and Grafana.
+The infrastructure is managed with **Terraform** and **Helm**, ensuring high availability and reliability. **Jenkins** handles automated CI/CD, while **Istio** secures inter-service communication. Logging and monitoring are streamlined through **FluentBit**, **CloudWatch**, **Prometheus**, and **Grafana**.
 
 ## Architecture  
 ![Architecture Diagram](https://raw.githubusercontent.com/csye7125-su24-team17/.github/main/profile/Architecture%20Diagram.png)
