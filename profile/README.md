@@ -21,7 +21,7 @@
 
 ## Key Features 
 
-- **Go-based CVE Processor and Consumer Application with Kafka**  
+- **Go-based CVE Processor and Consumer Application, Kafka**  
 The core of our system is built around a **Go-based CVE Processor** that downloads, extracts, and processes JSON files from **[CVEProject's Official GitHub Repository](https://github.com/CVEProject/cvelistV5/archive/refs/heads/main.zip)**, and then pushes it to a Kafka topic.
 
     Next, we have a **Go-based CVE Consumer** that retrieves those messages from Kafka and stores them in a PostgreSQL database. Before storing in Postgres, we have Flyway migration scripts to automatically create the necessary schema, tables, and views in PostgreSQL.
@@ -73,5 +73,8 @@ Our infrastructure spans two AWS accounts within an AWS organization: the **Jenk
 - **Service Mesh with Istio**  
 We implemented Istio as a service mesh to secure and manage communication between our microservices. Istio’s sidecar proxies enhance security, reliability, and observability by controlling and monitoring all service-to-service traffic. Additionally, we utilize Istio's Ingress Gateway and Virtual Services to securely expose select services to the internet, ensuring external access is tightly controlled and monitored.
 
-- **Logging with FluentBit and CloudWatch**
+- **Logging with FluentBit and CloudWatch**  
 For centralized logging, we integrated FluentBit, which aggregates logs from both the EKS control plane and all microservices. These logs are forwarded to AWS CloudWatch, providing a unified view for tracing errors and monitoring application behavior across the entire system.
+
+- **Monitoring and Visualization with Prometheus and Grafana**  
+To maintain system health and performance, we implemented Prometheus for comprehensive metrics collection. Prometheus scrapes metrics from each microservice, which are then visualized through Grafana dashboards. This setup enables real-time monitoring of CPU, memory, network usage, and application-specific metrics, providing deep insights into system behavior and performance.
