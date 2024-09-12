@@ -1,4 +1,4 @@
-# RAG and LLM-Based CVE Application hosted on Kubernetes 
+# RAG and LLM-Powered CVE Application hosted on Kubernetes 
 [<img src="https://img.shields.io/badge/-AWS-FF9900?logo=amazonaws&logoColor=white&style=plastic" width="70" height="40" />](https://aws.amazon.com/)
 [<img src="https://img.shields.io/badge/-Terraform-623CE4?logo=terraform&logoColor=white&style=plastic" width="150" height="40" />](https://www.terraform.io/)
 [<img src="https://img.shields.io/badge/-Go-00ADD8?" width="0" height="40" />](https://go.dev/)
